@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin/auteur')]
 class AdminAuteurController extends AbstractController
@@ -17,19 +18,24 @@ class AdminAuteurController extends AbstractController
     public function index(AuteurRepository $auteurRepository): Response
     {
         return $this->render('admin_auteur/index.html.twig', [
-            'auteurs' => $auteurRepository->findAll(),
+            'auteurs' => $auteurRepository->findBy([], ["id"=>'DESC']),
         ]);
     }
 
     #[Route('/new', name: 'app_admin_auteur_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AuteurRepository $auteurRepository): Response
+    public function new(Request $request, AuteurRepository $auteurRepository, SluggerInterface $slugger): Response
     {
         $auteur = new Auteur();
         $form = $this->createForm(AuteurType::class, $auteur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $auteur->setSlug(strtolower($slugger->slug($auteur->getNom())));
+            $auteur->setNom(ucfirst($auteur->getNom()));
             $auteurRepository->save($auteur, true);
+
+            //Mise en place d'un message flash
+            $this->addFlash('Succès', 'La catégorie a bien été ajoutée');
 
             return $this->redirectToRoute('app_admin_auteur_index', [], Response::HTTP_SEE_OTHER);
         }

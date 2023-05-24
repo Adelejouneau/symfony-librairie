@@ -18,9 +18,7 @@ class LivreType extends AbstractType
             ->remove('slug')
             ->add('updatedAt')
             ->add('auteurs')
-            ->add('relations')
             ->add('categorie')
-            ->add('auteur')
         ;
     }
 

@@ -17,7 +17,7 @@ class AuteurType extends AbstractType
             ->add('pseudo')
             ->add('biographie')
             ->add('imageName')
-            ->add('slug')
+            ->remove('slug')
             ->add('updatedAt')
             ->add('livres')
         ;
