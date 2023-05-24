@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin/categorie')]
 class AdminCategorieController extends AbstractController
@@ -17,19 +18,24 @@ class AdminCategorieController extends AbstractController
     public function index(CategorieRepository $categorieRepository): Response
     {
         return $this->render('admin_categorie/index.html.twig', [
-            'categories' => $categorieRepository->findAll(),
+            'categories' => $categorieRepository->findBy([], ["id"=>'DESC']),
         ]);
     }
 
     #[Route('/new', name: 'app_admin_categorie_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CategorieRepository $categorieRepository): Response
+    public function new(Request $request, CategorieRepository $categorieRepository, SluggerInterface $slugger): Response
     {
         $categorie = new Categorie();
         $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $categorie->setSlug(strtolower($slugger->slug($categorie->getNom())));
+            $categorie->setNom(ucfirst($categorie->getNom()));
             $categorieRepository->save($categorie, true);
+
+            //Mise en place d'un message flash
+            $this->addFlash('Succès', 'La catégorie a bien été ajoutée');
 
             return $this->redirectToRoute('app_admin_categorie_index', [], Response::HTTP_SEE_OTHER);
         }

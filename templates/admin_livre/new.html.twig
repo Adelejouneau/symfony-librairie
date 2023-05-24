@@ -1,0 +1,15 @@
+{% extends 'base-backend.html.twig' %}
+
+
+{% block title %}Nouveau Livre{% endblock %}
+
+{% block body %}
+
+<a href="{{ path('app_admin_livre_index') }}" class="btn btn-dark mb-3">Retour</a>
+    
+    <h1>Ajouter un nouveau livre</h1>
+
+    {{ include('admin_livre/_form.html.twig') }}
+
+    
+{% endblock %}

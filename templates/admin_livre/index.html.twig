@@ -1,0 +1,59 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %}Livre index{% endblock %}
+
+{% block body %}
+
+{% for label, messages in app.flashes() %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+<div class="d-flex flex-wrap justify-content-between align-items-center">
+    <h1>Livre index</h1>
+    <a href="{{ path('app_admin_livre_new') }}" class="btn btn-success"><i class="align-middle" data-feather="plus"></i></a>
+</div>
+    <table class="table">
+
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>ImageName</th>
+                <th>Slug</th>
+                <th>UpdatedAt</th>
+                <th>Auteurs</th>
+                <th>Relations</th>
+                <th class="text-end">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for livre in livres %}
+            <tr>
+                <td>{{ livre.id }}</td>
+                <td>{{ livre.titre }}</td>
+                <td>{{ livre.description }}</td>
+                <td>{{ livre.imageName }}</td>
+                <td>{{ livre.slug }}</td>
+                <td>{{ livre.updatedAt ? livre.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ livre.auteurs }}</td>
+                <td>{{ livre.relations }}</td>
+                <td class="text-end">
+                    <a href="{{ path('app_admin_livre_show', {'id': livre.id}) }}" class="btn btn-warning"><i class="align-middle" data-feather="eye"></i></a>
+                    <a href="{{ path('app_admin_livre_edit', {'id': livre.id}) }}" class="btn btn-success"><i class="align-middle" data-feather="edit"></i></a>
+                    
+                </td>
+            </tr>
+        {% else %}
+            <tr class="text-end">
+                <td colspan="9">aucun livre n'est renseigné</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -2,25 +2,31 @@
 
 namespace App\Form;
 
-use App\Entity\Categorie;
+use App\Entity\Auteur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CategorieType extends AbstractType
+class AuteurType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('nom')
-            ->remove('slug')
+            ->add('prenom')
+            ->add('pseudo')
+            ->add('biographie')
+            ->add('imageName')
+            ->add('slug')
+            ->add('updatedAt')
+            ->add('livres')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Categorie::class,
+            'data_class' => Auteur::class,
         ]);
     }
 }

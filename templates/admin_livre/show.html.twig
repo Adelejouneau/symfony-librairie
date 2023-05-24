@@ -1,0 +1,53 @@
+{% extends 'base-backend.html.twig' %}
+
+{% block title %}Livre{% endblock %}
+
+{% block body %}
+
+<a href="{{ path('app_admin_livre_index') }}" class="btn btn-dark mb-3">Retour</a>
+
+    <h1>Livre</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ livre.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ livre.titre }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ livre.description }}</td>
+            </tr>
+            <tr>
+                <th>ImageName</th>
+                <td>{{ livre.imageName }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ livre.slug }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ livre.updatedAt ? livre.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Auteurs</th>
+                <td>{{ livre.auteurs }}</td>
+            </tr>
+            <tr>
+                <th>Relations</th>
+                <td>{{ livre.relations }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+
+    <a href="{{ path('app_admin_livre_edit', {'id': livre.id}) }}" class="btn btn-success mb-3">Modifier</a>
+
+    {{ include('admin_livre/_delete_form.html.twig') }}
+{% endblock %}
