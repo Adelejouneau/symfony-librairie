@@ -12,6 +12,10 @@ class AuteurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('imageFile', FileType::class, [
+                'required' => false,
+                'label' => "Image de l'auteur",
+            ])
             ->add('nom')
             ->add('prenom')
             ->add('pseudo')
