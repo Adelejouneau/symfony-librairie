@@ -19,7 +19,7 @@ class Auteur
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -41,7 +41,7 @@ class Auteur
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column]
+    #[ORM\Column (nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToMany(targetEntity: Livre::class, mappedBy: 'auteur')]
@@ -52,10 +52,18 @@ class Auteur
         $this->livres = new ArrayCollection();
     }
 
+// ====================================================== //
+// =================== MAGIC FUNCTION =================== //
+// ====================================================== //
+
     public function __toString(): string
     {
-        return $this->nom;
+        return (!is_null($this->pseudo)) ? $this->pseudo : $this->prenom . ' ' . $this->nom;
     }
+
+// ====================================================== //
+// =================== GETTER / SETTER ================== //
+// ====================================================== //
 
     public function getId(): ?int
     {

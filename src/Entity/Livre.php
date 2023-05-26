@@ -42,10 +42,10 @@ class Livre
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $auteurs = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $relations = null;
 
     #[ORM\ManyToMany(targetEntity: Auteur::class, inversedBy: 'livres')]

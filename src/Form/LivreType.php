@@ -35,7 +35,12 @@ class LivreType extends AbstractType
             ->add('auteurs', EntityType::class, [
                 'class' => 'App\Entity\Auteur',
                 'multiple' => true,
-                'expanded' => true,
+                // 'expanded' => true,
+                'attr' => [
+                    'class' => 'select2',
+                    'id' => 'select2-auteurs'
+                ], 
+                
             ])
         ;
     }

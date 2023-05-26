@@ -35,7 +35,7 @@
             <tr>
                 <td>{{ livre.id }}</td>
                 <td>{{ livre.titre }}</td>
-                <td>{{ livre.description }}</td>
+                <td>{{ livre.description|raw }}</td>
                 <td>{{ livre.imageName }}</td>
                 <td>{{ livre.slug }}</td>
                 <td>{{ livre.updatedAt ? livre.updatedAt|date('Y-m-d H:i:s') : '' }}</td>

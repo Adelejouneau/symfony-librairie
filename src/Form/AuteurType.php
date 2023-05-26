@@ -6,6 +6,7 @@ use App\Entity\Auteur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class AuteurType extends AbstractType
 {
@@ -20,9 +21,12 @@ class AuteurType extends AbstractType
             ->add('prenom')
             ->add('pseudo')
             ->add('biographie')
-            ->add('imageName')
+            // ->add('imageName')
             ->remove('slug')
-            ->add('updatedAt')
+            ->remove('updatedAt', DateTimeType::class, [
+                'widget' => 'single_text',
+                'data' => new \DateTimeImmutable(),
+            ])
             ->add('livres')
         ;
     }
