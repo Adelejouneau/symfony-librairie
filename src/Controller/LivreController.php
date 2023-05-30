@@ -20,4 +20,15 @@ class LivreController extends AbstractController
             'livres' => $livres,
         ]);
     }
+
+    #[Route('/livre/{slug}', name: 'app_livre_show')]
+    public function showBook($slug, LivreRepository $livreRepository): Response
+    {
+        // On récupère le livre correspondant au slug
+        $livre = $livreRepository->findOneBy(['slug'=>$slug]);
+        // On rend la page en lui passant le livre
+        return $this->render('livre/show.html.twig', [
+            'livre' => $livre,
+        ]);
+    }
 }

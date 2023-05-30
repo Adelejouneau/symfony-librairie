@@ -33,6 +33,6 @@ class CategorieFixtures extends Fixture
         $manager->persist($categorie);
         $this->addReference(self::ESSAI_PHILOSOPHIQUE, $categorie);
 
-        $manager->flush();
+        $manager->flush();  
     }
 }

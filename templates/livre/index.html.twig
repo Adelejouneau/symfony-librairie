@@ -5,10 +5,24 @@
 {% block body %}
 <h1>Nos livres</h1>
 
-<ul>
+{# On affiche tous les livres avec une boucle #}
+<div class="row">
+
 {% for livre in livres %}
-    <li>{{livre.titre}}</li>
+    <div class="col-12 col-md-3 col-xl-2">
+    <div class="card">
+    {% if livre.imageName is defined  and livre.imageName is not null%}
+    <img src="{{asset ('images/livres/' ~ livre.imageName)}}" class="card-img-top" alt="...">
+    {% else %}
+    <img src="{{asset ('images/livres/imagedefaut.jpg')}}" class="card-img-top" alt="...">
+    {% endif %}
+    <div class="card-body">
+        <a href="{{ path('app_livre_show', {slug: livre.slug}) }}" class="text-dark">{{ livre.titre }}</a>
+    </div>
+    </div>
+    </div>
+</div>
 {% endfor %}
-</ul>
+
 
 {% endblock %}
