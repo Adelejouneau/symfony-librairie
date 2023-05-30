@@ -44,7 +44,7 @@ class Auteur
     #[ORM\Column (nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToMany(targetEntity: Livre::class, mappedBy: 'auteur')]
+    #[ORM\ManyToMany(targetEntity: Livre::class, mappedBy: 'auteurs')]
     private Collection $livres;
 
     public function __construct()
@@ -191,7 +191,7 @@ class Auteur
     {
         if (!$this->livres->contains($livre)) {
             $this->livres->add($livre);
-            $livre->addAuteur($this);
+            $livre->addAuteurs($this);
         }
 
         return $this;
@@ -200,7 +200,7 @@ class Auteur
     public function removeLivre(Livre $livre): self
     {
         if ($this->livres->removeElement($livre)) {
-            $livre->removeAuteur($this);
+            $livre->removeAuteurs($this);
         }
 
         return $this;

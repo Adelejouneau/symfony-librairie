@@ -39,8 +39,13 @@
                 <td>{{ livre.imageName }}</td>
                 <td>{{ livre.slug }}</td>
                 <td>{{ livre.updatedAt ? livre.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ livre.auteurs }}</td>
-                <td>{{ livre.relations }}</td>
+                <td>
+                    <ul>
+                    {% for auteur in livre.auteurs %}
+                        <li>{{ auteur }}</li>
+                    {% endfor %}
+                    </ul>
+                </td>
                 <td class="text-end">
                     <a href="{{ path('app_admin_livre_show', {'id': livre.id}) }}" class="btn btn-warning"><i class="align-middle" data-feather="eye"></i></a>
                     <a href="{{ path('app_admin_livre_edit', {'id': livre.id}) }}" class="btn btn-success"><i class="align-middle" data-feather="edit"></i></a>

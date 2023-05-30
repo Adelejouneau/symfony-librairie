@@ -42,18 +42,14 @@ class Livre
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $auteurs = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $relations = null;
 
     #[ORM\ManyToMany(targetEntity: Auteur::class, inversedBy: 'livres')]
-    private Collection $auteur;
+    private Collection $auteurs;
 
     public function __construct()
     {
-        $this->auteur = new ArrayCollection();
+        $this->auteurs = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -163,50 +159,31 @@ class Livre
         return $this;
     }
 
-    public function getAuteurs(): ?string
-    {
-        return $this->auteurs;
-    }
+   
 
-    public function setAuteurs(string $auteurs): self
-    {
-        $this->auteurs = $auteurs;
-
-        return $this;
-    }
-
-    public function getRelations(): ?string
-    {
-        return $this->relations;
-    }
-
-    public function setRelations(string $relations): self
-    {
-        $this->relations = $relations;
-
-        return $this;
-    }
+   
+   
 
     /**
      * @return Collection<int, Auteur>
      */
-    public function getAuteur(): Collection
+    public function getAuteurs(): Collection
     {
-        return $this->auteur;
+        return $this->auteurs;
     }
 
-    public function addAuteur(Auteur $auteur): self
+    public function addAuteurs(Auteur $auteur): self
     {
-        if (!$this->auteur->contains($auteur)) {
-            $this->auteur->add($auteur);
+        if (!$this->auteurs->contains($auteur)) {
+            $this->auteurs->add($auteur);
         }
 
         return $this;
     }
 
-    public function removeAuteur(Auteur $auteur): self
+    public function removeAuteurs(Auteur $auteur): self
     {
-        $this->auteur->removeElement($auteur);
+        $this->auteurs->removeElement($auteur);
 
         return $this;
     }

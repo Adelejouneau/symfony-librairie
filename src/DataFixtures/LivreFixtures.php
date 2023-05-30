@@ -19,7 +19,7 @@ class LivreFixtures extends Fixture
         $livre->setImageName("bouleetbill-telbouletelbill.jpg");
         $livre->setSlug("boule-et-bill-tel-boule-tel-bill");
         $livre->setCategorie($this->getReference(CategorieFixtures::BANDE_DESSINEE));
-        $livre->addAuteur($this->getReference(AuteurFixtures::JEAN_ROBA));
+        $livre->addAuteurs($this->getReference(AuteurFixtures::JEAN_ROBA));
         $manager->persist($livre);
 
         $livre = new Livre();
@@ -29,7 +29,7 @@ class LivreFixtures extends Fixture
         $livre->setImageName("mortsurlenil.jpg");
         $livre->setSlug("mort-sur-le-nil");
         $livre->setCategorie($this->getReference(CategorieFixtures::ROMAN_POLICIER));
-        $livre->addAuteur($this->getReference(AuteurFixtures::AGATHA_CHRISTIE));
+        $livre->addAuteurs($this->getReference(AuteurFixtures::AGATHA_CHRISTIE));
         $manager->persist($livre);
 
         $livre = new Livre();
@@ -39,7 +39,7 @@ class LivreFixtures extends Fixture
         $livre->setImageName("a-propos-damour.jpg");
         $livre->setSlug("a-propos-damour");
         $livre->setCategorie($this->getReference(CategorieFixtures::ESSAI_PHILOSOPHIQUE));
-        $livre->addAuteur($this->getReference(AuteurFixtures::BELL_HOOKS));
+        $livre->addAuteurs($this->getReference(AuteurFixtures::BELL_HOOKS));
         $manager->persist($livre);
         
         $manager->flush();
