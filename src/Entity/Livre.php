@@ -51,7 +51,7 @@ class Livre
     {
         $this->auteurs = new ArrayCollection();
     }
-
+    
     public function __toString(): string
     {
         return $this->titre;
@@ -159,10 +159,6 @@ class Livre
         return $this;
     }
 
-   
-
-   
-   
 
     /**
      * @return Collection<int, Auteur>

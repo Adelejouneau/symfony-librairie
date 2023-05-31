@@ -16,13 +16,21 @@ class UserFixtures extends Fixture
         $this->encoder = $encoder;
 
     }
-   
+    
     public function load(ObjectManager $manager): void
     {
         $user = new User();
         $user->setEmail('adele.jouneau@hotmail.fr');
         $user->setPassword($this->encoder->hashPassword($user, 'pass'));
         $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+        $user->setIsVerified(true);
+        $manager->persist($user);
+
+        $user = new User();
+        $user->setEmail('user@user.com');
+        $user->setPassword($this->encoder->hashPassword($user, 'pass'));
+        $user->setRoles(['ROLE_USER']);
+        $user->setIsVerified(true);
         $manager->persist($user);
 
         $manager->flush();
