@@ -2,4 +2,4 @@
 fos_ck_editor:
     configs:
         my_config:
-            toolbar: standard
+            toolbar: basic
