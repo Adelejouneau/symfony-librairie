@@ -18,6 +18,11 @@
     {% endif %}
     <div class="card-body">
         <a href="{{ path('app_livre_show', {slug: livre.slug}) }}" class="text-dark">{{ livre.titre }}</a>
+        {% if app.user is not null %} 
+        {% if livre not in app.user.livres %}
+        <a href="{{ path('app_favori', {id: livre.id }) }}" class="mt-3 btn btn-dark">Ajouter aux favoris</a>
+        {% endif %}
+        {% endif %}
     </div>
     </div>
     </div>
